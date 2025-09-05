@@ -158,6 +158,30 @@ ns.ENCHANT_SPELL_IDS = {
     [7454]=1,
     [13485]=1,
     [7748]=1,
+    -- P6 SOD
+    [463871]=1, -- Law of Nature
+    [1217203]=1, -- Bracers Agility
+    [1213616]=1, -- Chest Living Stats
+    [1217189]=1, -- Bracer Spellpower
+    [1213626]=1, -- Gloves Arcane Power
+    [1213622]=1, -- Gloves Holy Power
+    [1213603]=1, -- Ruby-Encrusted Broach
+    [1213593]=1, -- Speedstone
+    [1216014]=1, -- Totem of Pyroclastic Thunder
+    [1213635]=1, -- Enchanted Mushroom
+    [1216018]=1, -- Totem of Flowing Magma
+    [1216020]=1, -- Idol of Sidereal Wrath
+    [1216016]=1, -- Totem of Thunderous Strikes
+    [1213600]=1, -- Enchanted Stopwatch
+    [1213633]=1, -- Enchanted Totem
+    [1216022]=1, -- Idol of Feline Ferocity
+    [1216024]=1, -- Idol of Ursin Power
+    [1213595]=1, -- Tear of the Dreamer
+    [1213598]=1, -- Lodestone
+    -- P7 SOD
+    
+    -- P8 SOD
+
 }
 local items = {}
 for id, _ in pairs(ns.ENCHANT_SPELL_IDS) do
