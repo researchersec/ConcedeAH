@@ -179,8 +179,20 @@ ns.ENCHANT_SPELL_IDS = {
     [1213595]=1, -- Tear of the Dreamer
     [1213598]=1, -- Lodestone
     -- P7 SOD
-    
+    [1219587]=1, -- Cloak Agility
+    [1220624]=1, -- Bracers Greater Spellpower
+    [1219586]=1, -- Gloves Superior Strength
+    [1219577]=1, -- Off-Hand Superior Intellect
+    [1219580]=1, -- 2H Weapon Spellblasting
+    [1220623]=1, -- Shield Critical Strike
+    [1219578]=1, -- Off-Hand Excellent Spirit
+    [1219581]=1, -- Shield Excellent Stamina
+    [1219579]=1, -- Off-Hand Wisdom
     -- P8 SOD
+    [1231128]=1, -- Weapon - Grand Crusader
+    [1232172]=1, -- 2H Weapon - Grand Inquisitor
+    [1231164]=1, -- Weapon - Grand Sorceror
+    [1231139]=1, -- 2H Weapon - Grand Arcanist
 
 }
 local items = {}
