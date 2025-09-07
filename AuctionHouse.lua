@@ -6,8 +6,8 @@ local LibDeflate = LibStub("LibDeflate")
 local API = ns.AuctionHouseAPI
 
 
-local COMM_PREFIX = "OFAuctionHouse"
-local OF_COMM_PREFIX = "OnlyFangsAddon"
+local COMM_PREFIX = "ConcedeAH"
+local OF_COMM_PREFIX = "ConcedeAddon"
 local T_AUCTION_STATE_REQUEST = "AUCTION_STATE_REQUEST"
 local T_AUCTION_STATE = "AUCTION_STATE"
 
@@ -216,21 +216,21 @@ function AuctionHouse:OnInitialize()
         API:TrimTrades()
     end)
 
-    -- Add TEST_USERS to OnlyFangsStreamerMap for debugging. eg the mail don't get auto returned
+    -- Add TEST_USERS to ConcedeStreamerMap for debugging. eg the mail don't get auto returned
     -- run periodically because these maps get rebuilt regularly when the guild roaster updates
     if TEST_USERS[UnitName("player")] then
         C_Timer.NewTicker(1, function()
             local realmName = GetRealmName()
             realmName = realmName:gsub("%s+", "")
 
-            if _G.OnlyFangsStreamerMap then
+            if _G.ConcedeStreamerMap then
                 for name, value in pairs(TEST_USERS) do
-                    _G.OnlyFangsStreamerMap[name .. "-" .. realmName] = value
+                    _G.ConcedeStreamerMap[name .. "-" .. realmName] = value
                 end
             end
-            if _G.OnlyFangsRaceMap then
+            if _G.ConcedeRaceMap then
                 for name, value in pairs(TEST_USERS_RACE) do
-                    _G.OnlyFangsRaceMap[name .. "-" .. realmName] = value
+                    _G.ConcedeRaceMap[name .. "-" .. realmName] = value
                 end
             end
         end)

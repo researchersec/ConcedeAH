@@ -1,11 +1,11 @@
 function ChatPrefix()
     -- color = "ffffcc00"
-    return "|cffFF8000OnlyFangs AH|r"
+    return "|cffFF8000ConcedeAH|r"
 end
 
 function ChatPrefixError()
     -- color = "FFFF0000"
-    return "|cFFFF0000OnlyFangs AH|r"
+    return "|cFFFF0000ConcedeAH|r"
 end
 
 function CreatePlayerLink(playerName)

@@ -2163,8 +2163,8 @@ function OFAuctionFrameAuctions_Update()
             button.auctionId = auction.id
         end
 
-        local isItem = index == 1
-        local isEnchantEntry = index == 2
+        --local isItem = index == 1
+        local isEnchantEntry = index == 1
 		-- Show or hide auction buttons
         if isItem then
             auction = nil

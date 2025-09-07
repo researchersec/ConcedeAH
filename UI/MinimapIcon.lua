@@ -24,7 +24,7 @@ local function wrapColor(text, color)
 end
 
 function plugin.OnTooltipShow(tt)
-    tt:AddLine("OnlyFangs AH")
+    tt:AddLine("ConcedeAH")
     local grey = "808080"
     local me = UnitName("player")
 

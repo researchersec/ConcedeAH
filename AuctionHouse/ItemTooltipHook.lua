@@ -30,7 +30,7 @@ GameTooltip:HookScript("OnTooltipSetItem", function(tooltip, ...)
 
     local headerShown = false
     if OFAuctionFrame:IsShown() and OFAuctionFrameAuctions:IsShown() then
-        tooltip:AddLine("|cffff4040<OnlyFangs AH>|r")
+        tooltip:AddLine("|cffff4040<ConcedeAH>|r")
         tooltip:AddLine("right-click: use item")
         tooltip:AddLine("shift+right-click: auction item")
         headerShown = true
@@ -42,7 +42,7 @@ GameTooltip:HookScript("OnTooltipSetItem", function(tooltip, ...)
         if headerShown then
             tooltip:AddLine("|cffffff00Needed By:|r")
         else
-            tooltip:AddLine("|cffff4040<OnlyFangs AH>|r |cffffff00Needed By:|r")
+            tooltip:AddLine("|cffff4040<ConcedeAH>|r |cffffff00Needed By:|r")
         end
         local i = 0
         for _, a in pairs(auctions) do

@@ -90,7 +90,7 @@ function MailboxUI:CreateMailboxUI()
 
     -- Create a container frame (AceGUI Frame)
     local frame = AceGUI:Create("Frame")
-    frame:SetTitle("OnlyFangs AH")
+    frame:SetTitle("ConcedeAH")
     frame:SetStatusText("")
     frame:SetLayout("Flow")
     frame:EnableResize(false)

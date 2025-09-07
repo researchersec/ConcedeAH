@@ -472,7 +472,6 @@ OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_MISCELLANEOUS)
 
 OFAuctionFrame_CreateCategory("Enchants"):SetFlag("BLUE_HIGHLIGHT")
 
-OFAuctionFrame_CreateCategory("Gold Missions"):SetFlag("BLUE_HIGHLIGHT")
 
 ns.CategoryIndexToID = {
     2,

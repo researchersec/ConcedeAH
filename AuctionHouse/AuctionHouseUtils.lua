@@ -54,7 +54,7 @@ end
 
 
 ns.IsGuildMember = function(name)
-    if not _G.OnlyFangsStreamerMap then
+    if not _G.ConcedeStreamerMap then
         -- fallback to checking for online members, shouldn't happen on prod
         local data = ns.GuildRegister:GetMemberData(name)
         if data then
@@ -64,7 +64,7 @@ ns.IsGuildMember = function(name)
     end
 
     local fullCharName = name .. REALM_NAME_SUFFIX
-    local ofTwitchName = _G.OnlyFangsStreamerMap[fullCharName]
+    local ofTwitchName = _G.ConcedeStreamerMap[fullCharName]
     if ofTwitchName then
         return true
     end
@@ -87,9 +87,9 @@ ns.GetTwitchName = function(owner)
         return "Flawlezz"
     end
 
-    if _G.OnlyFangsStreamerMap then
+    if _G.ConcedeStreamerMap then
         local fullCharName = owner .. REALM_NAME_SUFFIX
-        local ofTwitchName = _G.OnlyFangsStreamerMap[fullCharName]
+        local ofTwitchName = _G.ConcedeStreamerMap[fullCharName]
         if ofTwitchName then
             return ofTwitchName
         end
@@ -128,7 +128,7 @@ ns.GetDisplayName = function (name, racePosition, maxCharacters)
 end
 
 ns.GetUserRace = function(owner)
-    return _G.OnlyFangsRaceMap and _G.OnlyFangsRaceMap[owner .. REALM_NAME_SUFFIX]
+    return _G.ConcedeRaceMap and _G.ConcedeRaceMap[owner .. REALM_NAME_SUFFIX]
 end
 
 -- Converts a price in copper to gold, silver, and copper components

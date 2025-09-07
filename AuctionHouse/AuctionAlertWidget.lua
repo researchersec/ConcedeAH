@@ -144,7 +144,7 @@ local function CreateAlertMessage(auction, buyer, buyerName, owner, ownerName, i
         msg = nil
         msgChat = string.format("%s |cffffcc00Transaction successful|r, %s%s with %s",
             ChatPrefix(), itemLink, quantityStr, otherUserLink)
-        extraMsg = string.format("%s Write your review in the OnlyFangs AH Addon", ChatPrefix())
+        extraMsg = string.format("%s Write your review in the ConcedeAH Addon", ChatPrefix())
     end
 
     return msg, msgChat, extraMsg

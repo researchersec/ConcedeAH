@@ -8,7 +8,7 @@ function OFGetUpdateUrl()
 end
 
 StaticPopupDialogs[POPUP_NAME] = {
-    text = "|cffffd100OnlyFangs AH|r\n|cffffffffUpdate Available. Please copy the link to update.|r",
+    text = "|cffffd100ConcedeAH|r\n|cffffffffUpdate Available. Please copy the link to update.|r",
     button1 = "Open Guild AH (5)",
     OnAccept = function()
         ns.PlayerPrefs:Set(ns.PREF_UPDATE_AVAILABLE_LAST_SHOWN_AT, time())
