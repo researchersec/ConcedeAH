@@ -20,11 +20,9 @@ OF_BROWSE_SEARCH_PLACEHOLDER = "Search or wishlist"
 local TAB_BROWSE = 1
 local TAB_AUCTIONS = 2
 local TAB_PENDING = 3
-local TAB_SETTINGS = 4
 ns.AUCTION_TAB_BROWSE = TAB_BROWSE
 ns.AUCTION_TAB_AUCTIONS = TAB_AUCTIONS
 ns.AUCTION_TAB_PENDING = TAB_PENDING
-ns.AUCTION_TAB_SETTINGS = TAB_SETTINGS
 
 local BROWSE_PARAM_INDEX_PAGE = 5;
 local PRICE_TYPE_UNIT = 1;
@@ -32,10 +30,6 @@ local PRICE_TYPE_STACK = 2;
 
 local activeTooltipPriceTooltipFrame
 local activeTooltipAuctionFrameItem
-local allowLoans = false
-local roleplay = false
-local deathRoll = false
-local duel = false
 local currentSortParams = {}
 local browseResultCache
 local browseSortDirty = true
@@ -76,70 +70,6 @@ local function OFSetSelectedAuctionItem(type, auction)
 end
 
 
-function OFAllowLoansCheckButton_OnClick(button)
-    PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-    allowLoans = not allowLoans
-    if allowLoans then
-        roleplay = false
-        duel = false
-        deathRoll = false
-        local priceType = OFAuctionFrameAuctions.priceTypeIndex
-        if priceType ~= ns.PRICE_TYPE_MONEY then
-            OFSetupPriceTypeDropdown(OFAuctionFrameAuctions)
-            OFPriceTypeDropdown:GenerateMenu()
-        end
-    end
-    OFUpdateAuctionSellItem()
-end
-
-function OFRoleplayCheckButton_OnClick(button)
-    PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-    roleplay = not roleplay
-    if roleplay then
-        duel = false
-        deathRoll = false
-        allowLoans = false
-    end
-    OFUpdateAuctionSellItem()
-end
-
-function OFDeathRollCheckButton_OnClick(button)
-    deathRoll = not deathRoll
-    if deathRoll then
-        duel = false
-        roleplay = false
-        allowLoans = false
-    end
-    OFSpecialFlagCheckButton_OnClick()
-    OFUpdateAuctionSellItem()
-end
-
-function OFDuelCheckButton_OnClick(button)
-    duel = not duel
-    if duel then
-        deathRoll = false
-        roleplay = false
-        allowLoans = false
-    end
-    OFSpecialFlagCheckButton_OnClick()
-    OFUpdateAuctionSellItem()
-end
-
-function OFSpecialFlagCheckButton_OnClick()
-    PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-    if deathRoll or duel then
-        local priceType = OFAuctionFrameAuctions.priceTypeIndex
-        if priceType == ns.PRICE_TYPE_TWITCH_RAID then
-            OFSetupPriceTypeDropdown(OFAuctionFrameAuctions)
-            OFPriceTypeDropdown:GenerateMenu()
-        end
-        local deliveryType = OFAuctionFrameAuctions.deliveryTypeIndex
-        if deliveryType ~= ns.DELIVERY_TYPE_TRADE then
-            OFSetupDeliveryDropdown(OFAuctionFrameAuctions, ns.DELIVERY_TYPE_TRADE)
-            OFDeliveryDropdown:GenerateMenu()
-        end
-    end
-end
 
 local function GetAuctionSortColumn(sortTable)
 	local existingSortColumn, existingSortReverse = currentSortParams[sortTable].column, currentSortParams[sortTable].desc
@@ -444,22 +374,11 @@ StaticPopupDialogs["OF_FULFILL_AUCTION"] = {
 };
 
 function OFUpdateAuctionSellItem()
-    OFRoleplayCheckButton:SetChecked(roleplay)
-    OFAllowLoansCheckButton:SetChecked(allowLoans)
-    OFDeathRollCheckButton:SetChecked(deathRoll)
-    OFDuelCheckButton:SetChecked(duel)
-
-
     local priceType = OFAuctionFrameAuctions.priceTypeIndex
     if priceType == ns.PRICE_TYPE_MONEY then
         OFBuyoutPrice:Show()
-        OFTwitchRaidViewerAmount:Hide()
-    elseif priceType == ns.PRICE_TYPE_TWITCH_RAID then
-        OFBuyoutPrice:Hide()
-        OFTwitchRaidViewerAmount:Show()
     else
         OFBuyoutPrice:Hide()
-        OFTwitchRaidViewerAmount:Hide()
     end
     local name, texture, count, quality, canUse, price, pricePerUnit, stackCount, totalCount, itemID = OFGetAuctionSellItemInfo()
     local isGold = itemID == ns.ITEM_ID_GOLD
@@ -511,8 +430,6 @@ local function OnMoneySelected(self)
     auctionSellItemInfo = pack(name, texture, copper, quality, true, copper, 1, stackCount, myMoney, ns.ITEM_ID_GOLD)
     OFSetupPriceTypeDropdown(OFAuctionFrameAuctions)
     OFSetupDeliveryDropdown(OFAuctionFrameAuctions)
-    allowLoans = false
-    LockCheckButton(OFAllowLoansCheckButton, false)
     OFUpdateAuctionSellItem()
 end
 
@@ -520,7 +437,6 @@ function OFSelectEnchantForAuction(itemID)
     local name, _, quality, _, _, _, _, stackCount, _, texture = ns.GetSpellItemInfo(itemID)
     name = ITEM_QUALITY_COLORS[quality].hex..name.."|r"
     auctionSellItemInfo = pack(name, texture, 1, quality, true, 1, 1, stackCount, 1, itemID)
-    UnlockCheckButton(OFAllowLoansCheckButton)
     OFSetupPriceTypeDropdown(OFAuctionFrameAuctions)
     OFSetupDeliveryDropdown(OFAuctionFrameAuctions)
     OFUpdateAuctionSellItem()
@@ -560,7 +476,7 @@ function OFAuctionFrame_OnLoad (self)
     tinsert(UISpecialFrames, "OFAuctionFrame")
 
 	-- Tab Handling code
-	PanelTemplates_SetNumTabs(self, 4);
+	PanelTemplates_SetNumTabs(self, 3);
 	PanelTemplates_SetTab(self, 1);
 
 	-- Set focus rules
@@ -652,21 +568,6 @@ function OFAuctionFrameTab_OnClick(self, button, down)
 end
 
 
-local function AssignReviewTextures(includingLeftBorder)
-    local basepath = "Interface\\AddOns\\"..addonName.."\\Media\\auctionframe-review-"
-
-    if includingLeftBorder then
-        OFAuctionFrameBotLeft:SetTexture(basepath .. "botleft")
-        OFAuctionFrameTopLeft:SetTexture(basepath .. "topleft")
-    else
-        OFAuctionFrameBotLeft:SetTexture("Interface\\AuctionFrame\\UI-AuctionFrame-Bid-BotLeft")
-        OFAuctionFrameTopLeft:SetTexture("Interface\\AuctionFrame\\UI-AuctionFrame-Bid-TopLeft")
-    end
-    OFAuctionFrameTop:SetTexture("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Top")
-    OFAuctionFrameTopRight:SetTexture("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopRight")
-    OFAuctionFrameBot:SetTexture("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Bot")
-    OFAuctionFrameBotRight:SetTexture(basepath .. "botright")
-end
 
 local function AssignCreateOrderTextures()
     local basepath = "Interface\\AddOns\\"..addonName.."\\Media\\auctionframe-auction-"
@@ -685,8 +586,6 @@ function OFAuctionFrameSwitchTab(index)
 	OFAuctionFrameAuctions:Hide()
 	OFAuctionFrameBrowse:Hide()
 	OFAuctionFrameBid:Hide()
-    OFAuctionFrameSettings:Hide()
-    OFAuctionFrameSettings_OnSwitchTab()
     SetAuctionsTabShowing(false)
 
 	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB)
@@ -714,10 +613,6 @@ function OFAuctionFrameSwitchTab(index)
         OFAuctionFrameBotRight:SetTexture("Interface\\AuctionFrame\\UI-AuctionFrame-Bid-BotRight");
         OFAuctionFrameBid:Show();
         OFAuctionFrame.type = "bidder";
-    elseif ( index == TAB_SETTINGS ) then
-        AssignReviewTextures(true)
-        OFAuctionFrameSettings:Show()
-        OFAuctionFrame.type = "settings"
     end
 end
 
@@ -754,10 +649,8 @@ end
 function OFAuctionFrameBrowse_UpdateArrows()
 	OFSortButton_UpdateArrow(OFBrowseQualitySort, "list", "quality")
 	OFSortButton_UpdateArrow(OFBrowseTypeSort, "list", "type")
-    OFSortButton_UpdateArrow(OFBrowseLevelSort, "list", "level")
     OFSortButton_UpdateArrow(OFBrowseDeliverySort, "list", "delivery")
 	OFSortButton_UpdateArrow(OFBrowseHighBidderSort, "list", "seller")
-    OFSortButton_UpdateArrow(OFBrowseRatingSort, "list", "rating")
 	OFSortButton_UpdateArrow(OFBrowseCurrentBidSort, "list", "bid")
 end
 
@@ -1329,16 +1222,8 @@ local function UpdateItemEntry(index, i, offset, button, item, numBatchAuctions,
 
     _G[buttonName.."RequestItem"]:Show()
 
-    local levelText = _G[buttonName.."Level"]
-    if isGold or ns.IsSpellItem(item.id) then
-        levelText:SetText("")
-    else
-        levelText:SetText(level)
-    end
-
     Hide("DeathRollIcon")
     Hide("PriceText")
-    Hide("RatingFrame")
 
     button.buyoutPrice = 0
     button.itemCount = 1
@@ -1377,12 +1262,8 @@ local function UpdateEnchantAuctionEntry(index, i, offset, button, numBatchAucti
 
     _G[buttonName.."RequestItem"]:Show()
 
-    local levelText = _G[buttonName.."Level"]
-    levelText:SetText("")
-
     Hide("DeathRollIcon")
     Hide("PriceText")
-    Hide("RatingFrame")
 
     button.buyoutPrice = 0
     button.itemCount = 1
@@ -1499,11 +1380,6 @@ local function UpdateBrowseEntry(index, i, offset, button, auction, numBatchAuct
     _G[buttonName.."AuctionTypeText"]:SetText(ns.GetAuctionTypeDisplayString(auction.auctionType))
     _G[buttonName.."AuctionType"]:Show()
 
-    _G[buttonName.."Level"]:SetText(level)
-
-    local ratingFrame = _G[buttonName.."RatingFrame"]
-    ratingFrame:Show()
-    ratingFrame.ratingWidget:SetRating(ns.AuctionHouseAPI:GetAverageRatingForUser(auction.owner))
 
     UpdateDeliveryType(buttonName, auction)
 
@@ -1764,7 +1640,6 @@ local function UpdatePendingEntry(index, i, offset, button, auction, numBatchAuc
     local auctionTypeText = _G[buttonName.."AuctionTypeText"]
     auctionTypeText:SetText(ns.GetAuctionTypeDisplayString(auctionType))
 
-    _G[buttonName.."RatingFrame"].ratingWidget:SetRating(ns.AuctionHouseAPI:GetAverageRatingForUser(otherUser))
 
     local statusTooltip = _G[buttonName.."StatusTooltipFrame"]
     statusTooltip.tooltip = ns.GetAuctionStatusTooltip(auction)
@@ -1855,7 +1730,6 @@ function OFAuctionFrameBid_Update()
     OFSortButton_UpdateArrow(OFBidTypeSort, "bidder", "type")
     OFSortButton_UpdateArrow(OFBidDeliverySort, "bidder", "delivery")
     OFSortButton_UpdateArrow(OFBidBuyerName, "bidder", "buyer")
-    OFSortButton_UpdateArrow(OFBidRatingSort, "bidder", "rating")
     OFSortButton_UpdateArrow(OFBidStatusSort, "bidder", "status")
 	OFSortButton_UpdateArrow(OFBidBidSort, "bidder", "bid")
 
@@ -1949,10 +1823,6 @@ function OFSetupPriceTypeDropdown(self)
     end
 
     local function SetPriceSelected(index)
-        if index == ns.PRICE_TYPE_TWITCH_RAID then
-            deathRoll = false
-            duel = false
-        end
         self.priceTypeIndex = index
         OFUpdateAuctionSellItem()
     end
@@ -1961,7 +1831,6 @@ function OFSetupPriceTypeDropdown(self)
         if not isGoldSelected then
             rootDescription:CreateRadio("Gold", IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_MONEY)
         end
-        rootDescription:CreateRadio("Twitch Raid", IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_TWITCH_RAID)
         rootDescription:CreateRadio("Custom", IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_CUSTOM)
     end)
 end
@@ -2036,7 +1905,6 @@ local function DeselectAuctionItem()
 
     OFSetupPriceTypeDropdown(OFAuctionFrameAuctions)
     OFSetupDeliveryDropdown(OFAuctionFrameAuctions)
-    UnlockCheckButton(OFAllowLoansCheckButton)
     local prev = GetCVar("Sound_EnableSFX")
     SetCVar("Sound_EnableSFX", 0)
     ns.TryFinally(
@@ -2058,7 +1926,7 @@ function OFAuctionFrameAuctions_OnHide(self)
 end
 
 function OFAuctionFrameAuctions_OnShow()
-    OFAuctionsTitle:SetFormattedText("OnlyFangs AH - %s's Auctions", UnitName("player"))
+    OFAuctionsTitle:SetFormattedText("Concede AH - %s's Auctions", UnitName("player"))
 	OFAuctionsFrameAuctions_ValidateAuction()
 	OFAuctionFrameAuctions_Update()
     OFPriceTypeDropdown:GenerateMenu()
@@ -2083,7 +1951,6 @@ local function UpdateAuctionEntry(index, i, offset, button, auction, numBatchAuc
     -- Set name and quality color
     local color = ITEM_QUALITY_COLORS[quality];
     local itemName = _G[buttonName.."Name"];
-    local itemLevel = _G[buttonName.."Level"]
     local iconTexture = _G[buttonName.."ItemIconTexture"];
     iconTexture:SetTexture(texture);
     local itemCount = _G[buttonName.."ItemCount"];
@@ -2105,7 +1972,6 @@ local function UpdateAuctionEntry(index, i, offset, button, auction, numBatchAuc
     UpdateDeliveryType(buttonName, auction)
 
 
-    itemLevel:SetText(level);
 
     if ( not canUse ) then
         iconTexture:SetVertexColor(1.0, 0.1, 0.1);
@@ -2148,7 +2014,6 @@ function OFAuctionFrameAuctions_Update()
 
 	-- Update sort arrows
 	OFSortButton_UpdateArrow(OFAuctionsQualitySort, "owner", "quality")
-	OFSortButton_UpdateArrow(OFAuctionsLevelSort, "owner", "level")
     OFSortButton_UpdateArrow(OFAuctionsTypeSort, "owner", "type")
     OFSortButton_UpdateArrow(OFAuctionsDeliverySort, "owner", "delivery")
     OFSortButton_UpdateArrow(OFAuctionsBidSort, "owner", "bid")
@@ -2270,7 +2135,6 @@ function OFAuctionSellItemButton_OnEvent(self, event, ...)
                 OF_LAST_ITEM_BUYOUT = MoneyInputFrame_GetCopper(OFBuyoutPrice)
             end
         end
-        UnlockCheckButton(OFAllowLoansCheckButton)
         OFSetupDeliveryDropdown(OFAuctionFrameAuctions)
         OFSetupPriceTypeDropdown(OFAuctionFrameAuctions)
         OFUpdateAuctionSellItem()
@@ -2298,13 +2162,9 @@ function OFAuctionsFrameAuctions_ValidateAuction()
         if ( MoneyInputFrame_GetCopper(OFBuyoutPrice) < 1 or MoneyInputFrame_GetCopper(OFBuyoutPrice) > OF_MAXIMUM_BID_PRICE) then
             return
         end
-    elseif priceType == ns.PRICE_TYPE_TWITCH_RAID then
-        if OFTwitchRaidViewerAmount:GetNumber() < 1 then
-            return
-        end
     elseif priceType == ns.PRICE_TYPE_CUSTOM then
         local note = OFAuctionsNote:GetText()
-        if (note == "" or note == OF_NOTE_PLACEHOLDER) and not duel and not deathRoll and not roleplay then
+        if (note == "" or note == OF_NOTE_PLACEHOLDER) then
             return
         end
     end
@@ -2314,6 +2174,21 @@ function OFAuctionsFrameAuctions_ValidateAuction()
         if priceType == ns.PRICE_TYPE_MONEY then
             return
         end
+    end
+
+    -- Check if user has enough items for the requested quantity
+    local stackSize = tonumber(OFAuctionsStackSizeEntry:GetText()) or 1
+    local numStacks = tonumber(OFAuctionsNumStacksEntry:GetText()) or 1
+    local totalQuantity = stackSize * numStacks
+    
+    if not isGold and totalQuantity > count then
+        return
+    end
+    
+    -- Check if user can create the requested number of auctions
+    local auctionCap = ns.GetConfig().auctionCap
+    if #ns.GetMyAuctions() + numStacks > auctionCap then
+        return
     end
 
 	OFAuctionsCreateAuctionButton:Enable()
@@ -2524,25 +2399,28 @@ function OFAuctionsCreateAuctionButton_OnClick()
 
     local priceType = OFAuctionFrameAuctions.priceTypeIndex
     local deliveryType = OFAuctionFrameAuctions.deliveryTypeIndex
-    local buyoutPrice, raidAmount
+    local buyoutPrice
     if priceType == ns.PRICE_TYPE_MONEY then
         buyoutPrice = GetBuyoutPrice()
-        raidAmount = 0
-    elseif priceType == ns.PRICE_TYPE_TWITCH_RAID then
-        buyoutPrice = 0
-        raidAmount = OFTwitchRaidViewerAmount:GetNumber()
     else
         buyoutPrice = 0
-        raidAmount = 0
     end
 
+    local stackSize = tonumber(OFAuctionsStackSizeEntry:GetText()) or 1
+    local numStacks = tonumber(OFAuctionsNumStacksEntry:GetText()) or 1
 
     local error, auctionCap, _
     auctionCap = ns.GetConfig().auctionCap
-    if #ns.GetMyAuctions() >= auctionCap then
+    if #ns.GetMyAuctions() + numStacks > auctionCap then
         error = string.format("You cannot have more than %d auctions", auctionCap)
     else
-        _, error = ns.AuctionHouseAPI:CreateAuction(itemID, buyoutPrice, count, allowLoans, priceType, deliveryType, ns.AUCTION_TYPE_SELL, roleplay, deathRoll, duel, raidAmount, note)
+        -- Create multiple auctions (one for each stack)
+        for i = 1, numStacks do
+            _, error = ns.AuctionHouseAPI:CreateAuction(itemID, buyoutPrice, stackSize, false, priceType, deliveryType, ns.AUCTION_TYPE_SELL, false, false, false, 0, note)
+            if error then
+                break -- Stop creating auctions if we get an error
+            end
+        end
     end
     if error then
         UIErrorsFrame:AddMessage(error, 1.0, 0.1, 0.1, 1.0);
@@ -2586,19 +2464,4 @@ function OFReadOnlyEditBox_OnLoad(self, content)
         end)
     end)
 
-end
-
-function OFRatingFrame_OnLoad(self)
-    local starRating = ns.CreateStarRatingWidget({
-        starSize = 6,
-        panelHeight = 6,
-        marginBetweenStarsX = 1,
-        leftMargin = 2,
-        labelFont = "GameFontNormalSmall",
-    })
-    self.ratingWidget = starRating
-    starRating.frame:SetParent(self)
-    starRating.frame:SetPoint("LEFT", self, "LEFT", -2, 0)
-    starRating:SetRating(3.5)
-    starRating.frame:Show()
 end

@@ -450,40 +450,31 @@ function OFAuctionCategoryMixin:HasFlag(flag)
 	return not not (self.flags and self.flags[flag]);
 end
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_WEAPONS)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_WEAPONS)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_ARMOR)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_ARMOR)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_CONTAINERS)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_CONTAINERS)
 
 OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_CONSUMABLES)
 
 OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_TRADE_GOODS)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_PROJECTILE)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_PROJECTILE)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_QUIVER)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_QUIVER)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_RECIPES)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_RECIPES)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_REAGENT)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_REAGENT)
 
-OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_MISCELLANEOUS)
+--OFAuctionFrame_CreateCategory(AUCTION_CATEGORY_MISCELLANEOUS)
 
 OFAuctionFrame_CreateCategory("Enchants"):SetFlag("BLUE_HIGHLIGHT")
 
 
 ns.CategoryIndexToID = {
-    2,
-    4,
-    1,
     0,
     7,
-    6,
-    11,
-    9,
-    5,
-    15,
-    ns.SPELL_ITEM_CLASS_ID,
-    ns.GOLD_ITEM_CLASS_ID,
+    ns.SPELL_ITEM_CLASS_ID
 }

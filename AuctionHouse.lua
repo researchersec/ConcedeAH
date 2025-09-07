@@ -187,7 +187,6 @@ function AuctionHouse:OnInitialize()
     ns.TradeAPI:OnInitialize()
     ns.MailboxUI:Initialize()
     ns.AuctionAlertWidget:OnInitialize()
-    SettingsUI_Initialize()
 
     local age = time() - ns.AuctionHouseDB.lastUpdateAt
     local auctions = ns.AuctionHouseDB.auctions
@@ -305,7 +304,7 @@ local function IsGuildMember(name)
 
     -- might still be guild member if the GuildRegister table didn't finish updating (server delay)
     -- check our hardcoded list for safety
-    return ns.GetAvgViewers(name) > 0
+    return false
 end
 
 function AuctionHouse:OnCommReceived(prefix, message, distribution, sender)

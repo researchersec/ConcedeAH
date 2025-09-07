@@ -164,24 +164,12 @@
 			<Layer level="BACKGROUND">
 				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
 					<Size>
-						<AbsDimension x="110" y="32" />
+						<AbsDimension x="152" y="32" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOPLEFT">
 							<Offset>
 								<AbsDimension x="43" y="0" />
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="$parentLevel" inherits="GameFontHighlightSmall">
-					<Size>
-						<AbsDimension x="42" y="32" />
-					</Size>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="145" y="0" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -426,19 +414,6 @@
 					</Layer>
 				</Layers>
 			</Frame>
-            <Frame name="$parentRatingFrame">
-                <Size>
-                    <AbsDimension x="60" y="32" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="$parentHighBidder" relativePoint="TOPRIGHT">
-                        <Offset x="2" y="0"/>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnLoad function="OFRatingFrame_OnLoad"/>
-                </Scripts>
-            </Frame>
             <Button name="$parentRequestItem" inherits="UIPanelButtonTemplate" text="Request Item">
                 <Size x="98" y="28" />
                 <Anchors>
@@ -525,7 +500,7 @@
             <Layer level="BACKGROUND">
                 <FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
                     <Size>
-                        <AbsDimension x="187" y="32" />
+                        <AbsDimension x="247" y="32" />
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
@@ -793,19 +768,6 @@
 					</OnLeave>
 				</Scripts>
 			</Frame>
-            <Frame name="$parentRatingFrame">
-                <Size>
-                    <AbsDimension x="60" y="32" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPRIGHT" relativeTo="$parentDeliveryType" relativePoint="TOPLEFT">
-                        <Offset x="0" y="0"/>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnLoad function="OFRatingFrame_OnLoad"/>
-                </Scripts>
-            </Frame>
             <Frame name="$parentMoneyFrame" inherits="SmallMoneyFrameTemplate">
 				<Anchors>
                     <Anchor point="RIGHT">
@@ -918,7 +880,7 @@
 			<Layer level="BACKGROUND">
 				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
 					<Size>
-						<AbsDimension x="167" y="32" />
+						<AbsDimension x="219" y="32" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -928,18 +890,6 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-                <FontString name="$parentLevel" inherits="GameFontHighlightSmall">
-                    <Size>
-                        <AbsDimension x="52" y="32" />
-                    </Size>
-                    <Anchors>
-                        <Anchor point="TOPLEFT">
-                            <Offset>
-                                <AbsDimension x="202" y="0" />
-                            </Offset>
-                        </Anchor>
-                    </Anchors>
-                </FontString>
                 <FontString name="$parentPriceText" inherits="GameFontHighlightSmall" text="Twitch Raid" justifyH="RIGHT">
                     <Size>
                         <AbsDimension x="100" y="32" />

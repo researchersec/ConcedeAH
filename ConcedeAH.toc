@@ -49,8 +49,6 @@ AuctionHouse/ItemTooltipHook.lua
 UI/Mailbox/Mailbox.lua
 
 UI/AuctionHouse/AuctionData.lua
-UI/AuctionHouse/SettingsUI.lua
-UI/AuctionHouse/SettingsUITemplates.xml
 
 UI/AuctionHouse/AuctionUI.lua
 UI/AuctionHouse/AuctionUITemplates.xml

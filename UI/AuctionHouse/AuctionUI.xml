@@ -83,15 +83,6 @@
 					</Anchor>
 				</Anchors>
 			</Button>
-            <Button name="OFAuctionFrameTab4" inherits="OFAuctionTabTemplate" id="4" text="SETTINGS">
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFAuctionFrameTab3" relativePoint="TOPRIGHT">
-                        <Offset>
-                            <AbsDimension x="-8" y="0" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-            </Button>
 			<Frame name="OFAuctionFrameMoneyFrame" inherits="SmallMoneyFrameTemplate">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT">
@@ -119,7 +110,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="BACKGROUND">
-						<FontString name="OFBrowseTitle" inherits="GameFontNormal" text="OnlyFangs AH - Browse Auctions">
+						<FontString name="OFBrowseTitle" inherits="GameFontNormal" text="Concede AH - Browse Auctions">
 							<Anchors>
 								<Anchor point="TOP">
 									<Offset>
@@ -409,7 +400,7 @@
 					</ScrollFrame>
 					<Button name="OFBrowseQualitySort" inherits="OFAuctionSortButtonTemplate" text="RARITY">
 						<Size>
-							<AbsDimension x="160" y="19" />
+							<AbsDimension x="200" y="19" />
 						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -421,27 +412,13 @@
 						<Scripts>
 							<OnClick>
 								OFAuctionFrame_OnClickSortColumn("list", "quality")
-							</OnClick>
-						</Scripts>
-					</Button>
-                    <Button name="OFBrowseLevelSort" inherits="OFAuctionSortButtonTemplate" text="REQ_LEVEL_ABBR">
-                        <Size x="35" y="19" />
-                        <Anchors>
-                            <Anchor x="-2" point="LEFT" relativeTo="OFBrowseQualitySort" relativePoint="RIGHT" />
-                        </Anchors>
-                        <Scripts>
-                            <OnLoad>
-                                _G[self:GetName().."Arrow"]:SetPoint("LEFT", _G[self:GetName().."Text"], "RIGHT", 0, -2)
-                            </OnLoad>
-                            <OnClick>
-                                OFAuctionFrame_OnClickSortColumn("list", "level")
                             </OnClick>
                         </Scripts>
                     </Button>
                     <Button name="OFBrowseTypeSort" inherits="OFAuctionSortButtonTemplate" text="Type">
-                        <Size x="50" y="19" />
+                        <Size x="60" y="19" />
                         <Anchors>
-                            <Anchor x="-2" point="LEFT" relativeTo="OFBrowseLevelSort" relativePoint="RIGHT" />
+                            <Anchor x="0" point="LEFT" relativeTo="OFBrowseQualitySort" relativePoint="RIGHT" />
                         </Anchors>
                         <Scripts>
                             <OnClick>
@@ -451,12 +428,12 @@
                     </Button>
 					<Button name="OFBrowseDeliverySort" inherits="OFAuctionSortButtonTemplate" text="Misc">
 						<Size>
-							<AbsDimension x="80" y="19" />
+							<AbsDimension x="100" y="19" />
 						</Size>
 						<Anchors>
 							<Anchor point="LEFT" relativeTo="OFBrowseTypeSort" relativePoint="RIGHT">
 								<Offset>
-									<AbsDimension x="-2" y="0" />
+									<AbsDimension x="0" y="0" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -468,12 +445,12 @@
 					</Button>
                     <Button name="OFBrowseHighBidderSort" inherits="OFAuctionSortButtonTemplate" text="Buyer/Seller">
 						<Size>
-							<AbsDimension x="139" y="19" />
+							<AbsDimension x="160" y="19" />
 						</Size>
 						<Anchors>
 							<Anchor point="LEFT" relativeTo="OFBrowseDeliverySort" relativePoint="RIGHT">
 								<Offset>
-									<AbsDimension x="-2" y="0" />
+									<AbsDimension x="0" y="0" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -483,31 +460,14 @@
 							</OnClick>
 						</Scripts>
 					</Button>
-                    <Button name="OFBrowseRatingSort" inherits="OFAuctionSortButtonTemplate" text="Rating">
+					<Button name="OFBrowseCurrentBidSort" inherits="OFAuctionSortButtonTemplate" text="Price">
                         <Size>
-                            <AbsDimension x="60" y="19" />
+							<AbsDimension x="150" y="19" />
                         </Size>
                         <Anchors>
                             <Anchor point="LEFT" relativeTo="OFBrowseHighBidderSort" relativePoint="RIGHT">
                                 <Offset>
-                                    <AbsDimension x="-2" y="0" />
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnClick>
-                                OFAuctionFrame_OnClickSortColumn("list", "rating")
-                            </OnClick>
-                        </Scripts>
-                    </Button>
-					<Button name="OFBrowseCurrentBidSort" inherits="OFAuctionSortButtonTemplate" text="Price">
-						<Size>
-							<AbsDimension x="126" y="19" />
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="OFBrowseRatingSort" relativePoint="RIGHT">
-								<Offset>
-									<AbsDimension x="-2" y="0" />
+									<AbsDimension x="0" y="0" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -936,7 +896,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="BACKGROUND">
-						<FontString name="OFBidTitle" inherits="GameFontNormal" text="OnlyFangs AH - Pending Orders">
+						<FontString name="OFBidTitle" inherits="GameFontNormal" text="Concede AH - Pending Orders">
 							<Anchors>
 								<Anchor point="TOP">
 									<Offset>
@@ -989,12 +949,12 @@
                     </Button>
 				   <Button name="OFBidBuyerName" inherits="OFAuctionSortButtonTemplate" text="Buyer/Seller">
                         <Size>
-                            <AbsDimension x="164" y="19" />
+                            <AbsDimension x="200" y="19" />
                         </Size>
                         <Anchors>
                             <Anchor point="LEFT" relativeTo="OFBidTypeSort" relativePoint="RIGHT">
                                 <Offset>
-                                    <AbsDimension x="-2" y="0" />
+                                    <AbsDimension x="0" y="0" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
@@ -1004,31 +964,14 @@
                             </OnClick>
                         </Scripts>
                     </Button>
-                    <Button name="OFBidRatingSort" inherits="OFAuctionSortButtonTemplate" text="Rating">
+                    <Button name="OFBidDeliverySort" inherits="OFAuctionSortButtonTemplate" text="Misc">
                         <Size>
-                            <AbsDimension x="60" y="19" />
+                            <AbsDimension x="120" y="19" />
                         </Size>
                         <Anchors>
                             <Anchor point="LEFT" relativeTo="OFBidBuyerName" relativePoint="RIGHT">
                                 <Offset>
-                                    <AbsDimension x="-2" y="0" />
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnClick>
-                                OFAuctionFrame_OnClickSortColumn("bidder", "rating")
-                            </OnClick>
-                        </Scripts>
-                    </Button>
-                    <Button name="OFBidDeliverySort" inherits="OFAuctionSortButtonTemplate" text="Misc">
-                        <Size>
-                            <AbsDimension x="80" y="19" />
-                        </Size>
-                        <Anchors>
-                            <Anchor point="LEFT" relativeTo="OFBidRatingSort" relativePoint="RIGHT">
-                                <Offset>
-                                    <AbsDimension x="-2" y="0" />
+                                    <AbsDimension x="0" y="0" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
@@ -1040,12 +983,12 @@
                     </Button>
                     <Button name="OFBidStatusSort" inherits="OFAuctionSortButtonTemplate" text="Status">
 						<Size>
-							<AbsDimension x="103" y="19" />
+							<AbsDimension x="120" y="19" />
 						</Size>
 						<Anchors>
                             <Anchor point="LEFT" relativeTo="OFBidDeliverySort" relativePoint="RIGHT">
                                 <Offset>
-                                    <AbsDimension x="-2" y="0" />
+                                    <AbsDimension x="0" y="0" />
                                 </Offset>
                             </Anchor>
 						</Anchors>
@@ -1349,30 +1292,13 @@
 						<Scripts>
 							<OnClick>
 								OFAuctionFrame_OnClickSortColumn("owner", "quality")
-							</OnClick>
-						</Scripts>
-					</Button>
-                    <Button name="OFAuctionsLevelSort" inherits="OFAuctionSortButtonTemplate" text="REQ_LEVEL_ABBR">
-                        <Size>
-                            <AbsDimension x="47" y="19" />
-                        </Size>
-                        <Anchors>
-                            <Anchor point="LEFT" relativeTo="OFAuctionsQualitySort" relativePoint="RIGHT">
-                                <Offset>
-                                    <AbsDimension x="-2" y="0" />
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnClick>
-                                OFAuctionFrame_OnClickSortColumn("owner", "level")
                             </OnClick>
                         </Scripts>
                     </Button>
 					<Button name="OFAuctionsTypeSort" inherits="OFAuctionSortButtonTemplate" text="Type">
-						<Size x="60" y="19" />
+						<Size x="80" y="19" />
 						<Anchors>
-							<Anchor x="-2" point="LEFT" relativeTo="OFAuctionsLevelSort" relativePoint="RIGHT" />
+							<Anchor x="0" point="LEFT" relativeTo="OFAuctionsQualitySort" relativePoint="RIGHT" />
 						</Anchors>
 						<Scripts>
 							<OnClick>
@@ -1381,9 +1307,9 @@
 						</Scripts>
 					</Button>
                     <Button name="OFAuctionsDeliverySort" inherits="OFAuctionSortButtonTemplate" text="Misc">
-                        <Size x="130" y="19" />
+                        <Size x="160" y="19" />
                         <Anchors>
-                            <Anchor x="-2" point="LEFT" relativeTo="OFAuctionsTypeSort" relativePoint="RIGHT" />
+                            <Anchor x="0" point="LEFT" relativeTo="OFAuctionsTypeSort" relativePoint="RIGHT" />
                         </Anchors>
                         <Scripts>
                             <OnClick>
@@ -1393,12 +1319,12 @@
                     </Button>
                     <Button name="OFAuctionsBidSort" inherits="OFAuctionSortButtonTemplate" text="Price">
                         <Size>
-                            <AbsDimension x="161" y="19" />
+                            <AbsDimension x="180" y="19" />
                         </Size>
                         <Anchors>
                             <Anchor point="LEFT" relativeTo="OFAuctionsDeliverySort" relativePoint="RIGHT">
                                 <Offset>
-                                    <AbsDimension x="-2" y="0" />
+                                    <AbsDimension x="0" y="0" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
@@ -1547,8 +1473,9 @@
 						</Scripts>
 						<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD" />
 					</Button>
-					<EditBox name="OFAuctionsStackSizeEntry" hidden="true" letters="4" numeric="true" autoFocus="false">
-						<Size x="50" y="20" />
+					<!-- Stack Quantity Controls -->
+					<EditBox name="OFAuctionsStackSizeEntry" letters="4" numeric="true" autoFocus="false">
+						<Size x="80" y="20" />
 						<Anchors>
 							<Anchor x="33" y="-147" point="TOPLEFT" relativeTo="OFAuctionFrameAuctions" relativePoint="TOPLEFT" />
 						</Anchors>
@@ -1576,7 +1503,7 @@
 									</Anchors>
 									<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
 								</Texture>
-								<FontString font="GameFontNormalSmall" text="AUCTION_STACK_SIZE">
+								<FontString font="GameFontNormalSmall" text="Items per stack:">
 									<Anchors>
 										<Anchor x="-8" y="3" point="BOTTOMLEFT" relativePoint="TOPLEFT" />
 									</Anchors>
@@ -1584,6 +1511,9 @@
 							</Layer>
 						</Layers>
 						<Scripts>
+							<OnLoad>
+								self:SetText("1")
+							</OnLoad>
 							<OnTabPressed>
 								if ( IsShiftKeyDown() ) then
 									if ( self.prevFocus ) then
@@ -1621,10 +1551,10 @@
 						</Scripts>
 						<FontString inherits="ChatFontNormal" />
 					</EditBox>
-					<EditBox name="OFAuctionsNumStacksEntry" hidden="true" letters="4" numeric="true" autoFocus="false">
-						<Size x="50" y="20" />
+					<EditBox name="OFAuctionsNumStacksEntry" letters="4" numeric="true" autoFocus="false">
+						<Size x="80" y="20" />
 						<Anchors>
-							<Anchor y="-15" point="TOPLEFT" relativeTo="OFAuctionsStackSizeEntry" relativePoint="BOTTOMLEFT" />
+							<Anchor y="-25" point="TOPLEFT" relativeTo="OFAuctionsStackSizeEntry" relativePoint="BOTTOMLEFT" />
 						</Anchors>
 						<Layers>
 							<Layer level="BACKGROUND">
@@ -1650,7 +1580,7 @@
 									</Anchors>
 									<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
 								</Texture>
-								<FontString font="GameFontNormalSmall" text="AUCTION_NUM_STACKS">
+								<FontString font="GameFontNormalSmall" text="Number of stacks:">
 									<Anchors>
 										<Anchor x="-8" y="3" point="BOTTOMLEFT" relativePoint="TOPLEFT" />
 									</Anchors>
@@ -1658,6 +1588,9 @@
 							</Layer>
 						</Layers>
 						<Scripts>
+							<OnLoad>
+								self:SetText("1")
+							</OnLoad>
 							<OnTabPressed>
 								if ( IsShiftKeyDown() ) then
 									if ( self.prevFocus ) then
@@ -1695,84 +1628,55 @@
 						</Scripts>
 						<FontString inherits="ChatFontNormal" />
 					</EditBox>
-                    <DropdownButton name="OFDeliveryDropdown" inherits="WowStyle1DropdownTemplate" id="1">
-                        <Size x="110" y="22" />
-                        <Anchors>
-                            <Anchor x="88" y="278" point="BOTTOMLEFT" relativeTo="OFAuctionFrameAuctions" relativePoint="BOTTOMLEFT">
-                            </Anchor>
-                        </Anchors>
-                        <Layers>
-                            <Layer level="OVERLAY">
-                                <FontString name="OFDeliveryDropdownName" inherits="GameFontHighlightSmall" text="Delivery">
-                                    <Anchors>
-                                        <Anchor point="LEFT" relativePoint="LEFT">
-                                            <Offset>
-                                                <AbsDimension x="-58" y="1"/>
-                                            </Offset>
-                                        </Anchor>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                    </DropdownButton>
-                    <DropdownButton name="OFPriceTypeDropdown" inherits="WowStyle1DropdownTemplate" id="2">
-                        <Size x="110" y="22" />
-                        <Anchors>
-                            <Anchor x="" y="-8" point="TOPLEFT" relativeTo="OFDeliveryDropdown" relativePoint="BOTTOMLEFT">
-                            </Anchor>
-                        </Anchors>
-                        <Layers>
-                            <Layer level="OVERLAY">
-                                <FontString name="$parentName" inherits="GameFontHighlightSmall" text="Price">
-                                    <Anchors>
-                                        <Anchor point="LEFT" relativePoint="LEFT">
-                                            <Offset>
-                                                <AbsDimension x="-58" y="1"/>
-                                            </Offset>
-                                        </Anchor>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                    </DropdownButton>
-                    <Frame name="OFBuyoutPrice" inherits="MoneyInputFrameTemplate">
-                        <Anchors>
-                            <Anchor x="5" y="-15" point="TOPLEFT" relativeTo="OFPriceTypeDropdownName" relativePoint="BOTTOMLEFT">
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnLoad>
-                                MoneyInputFrame_SetOnValueChangedFunc(self, OFAuctionsFrameAuctions_ValidateAuction);
-                            </OnLoad>
-                        </Scripts>
-                    </Frame>
-                    <EditBox name="OFTwitchRaidViewerAmount" letters="6" numeric="true" autoFocus="false" inherits="InputBoxTemplate" hidden="true">
-                        <Size>
-                            <AbsDimension x="50" y="16"/>
-                        </Size>
-                        <Anchors>
-                            <Anchor point="TOPLEFT" relativeTo="OFBuyoutPrice" relativePoint="TOPLEFT">
-                                <Offset>
-                                    <AbsDimension x="113" y="-1"/>
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Layers>
-                            <Layer>
-                                <FontString name="OFTwitchRaidViewerAmountText" inherits="GameFontHighlightSmall" text="Min Twitch viewers:">
-                                    <Anchors>
-                                        <Anchor x="-8" y="0" point="RIGHT" relativeTo="OFTwitchRaidViewerAmount" relativePoint="LEFT" />
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnLoad>
-                                self:SetText("200")
-                            </OnLoad>
-                            <OnEnterPressed function="EditBox_ClearFocus"/>
-                        </Scripts>
-                    </EditBox>
+					<!-- Auction Settings Controls -->
+					<DropdownButton name="OFDeliveryDropdown" inherits="WowStyle1DropdownTemplate" id="1">
+						<Size x="90" y="22" />
+						<Anchors>
+							<Anchor x="88" y="200" point="BOTTOMLEFT" relativeTo="OFAuctionFrameAuctions" relativePoint="BOTTOMLEFT" />
+						</Anchors>
+						<Layers>
+							<Layer level="OVERLAY">
+								<FontString name="OFDeliveryDropdownName" inherits="GameFontHighlightSmall" text="Delivery">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-58" y="1"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</DropdownButton>
+					<DropdownButton name="OFPriceTypeDropdown" inherits="WowStyle1DropdownTemplate" id="2">
+						<Size x="90" y="22" />
+						<Anchors>
+							<Anchor x="0" y="-10" point="TOPLEFT" relativeTo="OFDeliveryDropdown" relativePoint="BOTTOMLEFT" />
+						</Anchors>
+						<Layers>
+							<Layer level="OVERLAY">
+								<FontString name="$parentName" inherits="GameFontHighlightSmall" text="Price">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-58" y="1"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</DropdownButton>
+					<Frame name="OFBuyoutPrice" inherits="MoneyInputFrameTemplate">
+						<Anchors>
+							<Anchor x="5" y="-15" point="TOPLEFT" relativeTo="OFPriceTypeDropdownName" relativePoint="BOTTOMLEFT" />
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								MoneyInputFrame_SetOnValueChangedFunc(self, OFAuctionsFrameAuctions_ValidateAuction);
+							</OnLoad>
+						</Scripts>
+					</Frame>
 					<Button name="OFAuctionsCloseButton" inherits="UIPanelButtonTemplate" text="CLOSE">
 						<Size>
 							<AbsDimension x="80" y="22" />
@@ -1808,174 +1712,56 @@
 							</OnClick>
 						</Scripts>
 					</Button>
-                    <CheckButton name="OFAllowLoansCheckButton" inherits="UICheckButtonTemplate">
-                        <Size>
-                            <AbsDimension x="24" y="24" />
-                        </Size>
-                        <Anchors>
-                            <Anchor point="BOTTOMLEFT">
-                                <Offset>
-                                    <AbsDimension x="25" y="191" />
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnLoad>
-                                OFAllowLoansCheckButtonText:SetFontObject(GameFontHighlightSmall)
-                                OFAllowLoansCheckButtonText:SetText("Allow loan")
-                                OFAllowLoansCheckButtonText:SetScript("OnEnter", function ()
-                                    GameTooltip:SetOwner(OFAllowLoansCheckButtonText, "ANCHOR_TOPRIGHT", 100, 15);
-                                    GameTooltip_SetTitle(GameTooltip, "Buyout with loan");
-                                    GameTooltip_AddNormalLine(GameTooltip, "Allow players to buy the item on a loan. They have 7 days to pay or declare bankruptcy.", true);
-                                    GameTooltip:Show();
-                                end)
-                                OFAllowLoansCheckButtonText:SetScript("OnLeave", function ()
-                                    GameTooltip:Hide();
-                                end)
-                            </OnLoad>
-                            <OnClick>
-                                OFAllowLoansCheckButton_OnClick(self)
-                            </OnClick>
-                        </Scripts>
-                    </CheckButton>
-                    <CheckButton name="OFRoleplayCheckButton" inherits="UICheckButtonTemplate">
-                        <Size>
-                            <AbsDimension x="24" y="24"/>
-                        </Size>
-                        <Anchors>
-                            <Anchor point="RIGHT" relativeTo="OFAllowLoansCheckButton" relativePoint="RIGHT">
-                                <Offset>
-                                    <AbsDimension x="85" y="0"/>
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnLoad>
-                                OFRoleplayCheckButtonText:SetFontObject(GameFontHighlightSmall);
-                                OFRoleplayCheckButtonText:SetText("Roleplay");
-                                OFRoleplayCheckButtonText:SetScript("OnEnter", function ()
-                                    GameTooltip:SetOwner(OFRoleplayCheckButtonText, "ANCHOR_TOPRIGHT", 100, 15);
-                                    GameTooltip_SetTitle(GameTooltip, "Roleplay");
-                                    GameTooltip_AddNormalLine(GameTooltip, OF_ROLEPLAY_TOOLTIP, true);
-                                    GameTooltip:Show();
-                                end)
-                                OFRoleplayCheckButtonText:SetScript("OnLeave", function ()
-                                    GameTooltip:Hide();
-                                end)
-                            </OnLoad>
-                            <OnClick>
-                                OFRoleplayCheckButton_OnClick(self)
-                            </OnClick>
-                        </Scripts>
-                    </CheckButton>
-                    <CheckButton name="OFDeathRollCheckButton" inherits="UICheckButtonTemplate">
-                        <Size>
-                            <AbsDimension x="24" y="24"/>
-                        </Size>
-                        <Anchors>
-                            <Anchor point="RIGHT" relativeTo="OFAllowLoansCheckButton" relativePoint="RIGHT">
-                                <Offset>
-                                    <AbsDimension x="0" y="-20"/>
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnLoad>
-                                OFDeathRollCheckButtonText:SetFontObject(GameFontHighlightSmall);
-                                OFDeathRollCheckButtonText:SetText("Death Roll");
-                                OFDeathRollCheckButtonText:SetScript("OnEnter", function ()
-                                    GameTooltip:SetOwner(OFDeathRollCheckButtonText, "ANCHOR_TOPRIGHT", 100, 15);
-                                    GameTooltip_SetTitle(GameTooltip, "Death Roll");
-                                    GameTooltip_AddNormalLine(GameTooltip, OF_DEATH_ROLL_TOOLTIP, true);
-                                    GameTooltip:Show();
-                                end)
-                                OFDeathRollCheckButtonText:SetScript("OnLeave", function ()
-                                    GameTooltip:Hide();
-                                end)
-                            </OnLoad>
-                            <OnClick>
-                                OFDeathRollCheckButton_OnClick(self)
-                            </OnClick>
-                        </Scripts>
-                    </CheckButton>
-                    <CheckButton name="OFDuelCheckButton" inherits="UICheckButtonTemplate">
-                        <Size>
-                            <AbsDimension x="24" y="24"/>
-                        </Size>
-                        <Anchors>
-                            <Anchor point="RIGHT" relativeTo="OFRoleplayCheckButton" relativePoint="RIGHT">
-                                <Offset>
-                                    <AbsDimension x="0" y="-20"/>
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Scripts>
-                            <OnLoad>
-                                OFDuelCheckButtonText:SetFontObject(GameFontHighlightSmall)
-                                OFDuelCheckButtonText:SetText("Duel (Normal)")
-                                OFDuelCheckButtonText:SetScript("OnEnter", function ()
-                                    GameTooltip:SetOwner(OFDuelCheckButtonText, "ANCHOR_TOPRIGHT", 100, 15)
-                                    GameTooltip_SetTitle(GameTooltip, "Duel (Normal)")
-                                    GameTooltip_AddNormalLine(GameTooltip, OF_DUEL_TOOLTIP, true)
-                                    GameTooltip:Show()
-                                end)
-                                OFDuelCheckButtonText:SetScript("OnLeave", function ()
-                                    GameTooltip:Hide()
-                                end)
-                            </OnLoad>
-                            <OnClick>
-                                OFDuelCheckButton_OnClick(self)
-                            </OnClick>
-                        </Scripts>
-                    </CheckButton>
-                    <Frame name="OFAuctionsNoteBackdrop" inherits="BackdropTemplate" hidden="true">
-                        <KeyValues>
-                            <KeyValue key="backdropInfo" value="BACKDROP_TUTORIAL_16_16" type="global"/>
-                        </KeyValues>
-                        <Size>
-                            <AbsDimension x="183" y="60"/>
-                        </Size>
-                        <Anchors>
-                            <Anchor x="24" y="100" point="BOTTOMLEFT" relativeTo="OFAuctionFrameAuctions" relativePoint="BOTTOMLEFT" />
-                        </Anchors>
-                    </Frame>
-                    <EditBox name="OFAuctionsNote" letters="100" multiLine="true" autoFocus="false">
-                        <Size x="172" y="90" />
-                        <Anchors>
-                            <Anchor point="TOPLEFT" relativeTo="OFAuctionsNoteBackdrop" relativePoint="TOPLEFT">
-                                <Offset>
-                                    <AbsDimension x="3" y="0"/>
-                                </Offset>
-                            </Anchor>
-                        </Anchors>
-                        <Layers>
-                        </Layers>
-                        <Frames>
-                        </Frames>
-                        <Scripts>
-                            <OnLoad>
-                                self:SetText(OF_NOTE_PLACEHOLDER)
-                            </OnLoad>
-                            <OnEscapePressed function="EditBox_ClearFocus"/>
-                            <OnEditFocusLost>
-                                if self:GetText() == "" then
-                                    self:SetText(OF_NOTE_PLACEHOLDER)
-                                end
-                                EditBox_ClearHighlight(self)
-                            </OnEditFocusLost>
-                            <OnEditFocusGained>
-                                if self:GetText() == OF_NOTE_PLACEHOLDER then
-                                    self:SetText("")
-                                end
-                                EditBox_HighlightText(self)
-                            </OnEditFocusGained>
-                            <OnTextChanged>
-                                OFAuctionsFrameAuctions_ValidateAuction()
-                            </OnTextChanged>
-                        </Scripts>
-                        <FontString inherits="ChatFontSmall" />
-                    </EditBox>
-                    <Button name="OFAuctionsCreateAuctionButton" inherits="UIPanelButtonTemplate" text="CREATE_AUCTION">
+					<!-- Note Section -->
+					<Frame name="OFAuctionsNoteBackdrop" inherits="BackdropTemplate" hidden="true">
+						<KeyValues>
+							<KeyValue key="backdropInfo" value="BACKDROP_TUTORIAL_16_16" type="global"/>
+						</KeyValues>
+						<Size>
+							<AbsDimension x="183" y="60"/>
+						</Size>
+						<Anchors>
+							<Anchor x="5" y="-15" point="TOPLEFT" relativeTo="OFBuyoutPrice" relativePoint="BOTTOMLEFT" />
+						</Anchors>
+					</Frame>
+					<EditBox name="OFAuctionsNote" letters="100" multiLine="true" autoFocus="false">
+						<Size x="172" y="90" />
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="OFAuctionsNoteBackdrop" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="3" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+						</Layers>
+						<Frames>
+						</Frames>
+						<Scripts>
+							<OnLoad>
+								self:SetText(OF_NOTE_PLACEHOLDER)
+							</OnLoad>
+							<OnEscapePressed function="EditBox_ClearFocus"/>
+							<OnEditFocusLost>
+								if self:GetText() == "" then
+									self:SetText(OF_NOTE_PLACEHOLDER)
+								end
+								EditBox_ClearHighlight(self)
+							</OnEditFocusLost>
+							<OnEditFocusGained>
+								if self:GetText() == OF_NOTE_PLACEHOLDER then
+									self:SetText("")
+								end
+								EditBox_HighlightText(self)
+							</OnEditFocusGained>
+							<OnTextChanged>
+								OFAuctionsFrameAuctions_ValidateAuction()
+							</OnTextChanged>
+						</Scripts>
+						<FontString inherits="ChatFontSmall" />
+					</EditBox>
+					<!-- Create Auction Button -->
+					<Button name="OFAuctionsCreateAuctionButton" inherits="UIPanelButtonTemplate" text="CREATE_AUCTION">
 						<Size>
 							<AbsDimension x="191" y="20" />
 						</Size>
@@ -1997,9 +1783,6 @@
 					<OnEvent function="OFAuctionFrameAuctions_OnEvent" />
                     <OnHide function="OFAuctionFrameAuctions_OnHide" />
                 </Scripts>
-            </Frame>
-
-            <Frame name="OFAuctionFrameSettings" inherits="OFSettings_Template" hidden="true">
             </Frame>
         </Frames>
         <Scripts>
